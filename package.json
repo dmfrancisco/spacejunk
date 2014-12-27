@@ -2,5 +2,8 @@
   "name": "SpaceJunk",
   "version": "0.0.1",
   "description": "An opinionated TiddlyWiki setup",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "tiddlywiki": "5.1.7"
+  }
 }
