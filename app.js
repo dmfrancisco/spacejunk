@@ -3,6 +3,7 @@
 var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
    async = require("async"),
+      fs = require("fs"),
     path = $tw.node ? require("path") : null,
   config = {};
 
@@ -53,6 +54,30 @@ function boot(files, dropboxData) {
 
   // Boot the TW5 app
   $tw.boot.boot();
+
+  // Monkeypatch the tiddler saver from the default filesystem sync adaptor
+  $tw.syncadaptor.saveTiddler = (function (original) {
+    return function (tiddler, callback) {
+      fs.writeFile = function(filepath, content, options, callback) {
+        var filepath = filepath.replace(__dirname, dropboxPath);
+        client.writeFile(filepath, content, callback);
+      };
+
+      return original.apply(this, arguments);
+    };
+  })($tw.syncadaptor.saveTiddler);
+
+  // Monkeypatch the tiddler deleter from the default filesystem sync adaptor
+  $tw.syncadaptor.deleteTiddler = (function (original) {
+    return function (title, callback, options) {
+      fs.unlink = function(filepath, callback) {
+        var filepath = filepath.replace(__dirname, dropboxPath);
+        client.unlink(filepath, callback);
+      };
+
+      return original.apply(this, arguments);
+    };
+  })($tw.syncadaptor.deleteTiddler);
 }
 
 // Pass the command line arguments to the boot kernel
