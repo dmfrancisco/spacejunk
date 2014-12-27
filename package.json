@@ -5,5 +5,11 @@
   "private": true,
   "dependencies": {
     "tiddlywiki": "5.1.7"
+  },
+  "scripts": {
+    "start": "node app.js . --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
