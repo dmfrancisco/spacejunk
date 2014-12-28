@@ -6,7 +6,7 @@
   "dependencies": {
     "tiddlywiki": "5.1.7",
     "dropbox": "0.10.3",
-    "async": "0.9.0"
+    "synchronize": "0.9.9"
   },
   "scripts": {
     "start": "node app.js . --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0"

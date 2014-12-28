@@ -2,19 +2,19 @@
 
 var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
-   async = require("async"),
+    sync = require("synchronize"),
       fs = require("fs"),
-    path = $tw.node ? require("path") : null,
-  config = {};
+  config;
 
 try {
   config = require("./config.json");
 } catch (e) {
   console.log("No custom configurations were found.");
+  config = { "dropbox": {} };
 }
 
 // Create a volume with your credentials
-var client = new Dropbox.Client({
+var dropbox = new Dropbox.Client({
   key: (process.env.DROPBOX_KEY || config.dropbox.key),
   secret: (process.env.DROPBOX_SECRET || config.dropbox.secret),
   token: (process.env.DROPBOX_TOKEN || config.dropbox.token)
@@ -25,75 +25,105 @@ var appname = (process.env.APP_NAME || config.appname),
   tiddlersPathSuffix = "/tiddlers/",
   dropboxPath = process.env.DROPBOX_PATH || config.dropbox.path || ("/Apps/Heroku/"+ appname);
 
-function boot(files, dropboxData) {
-  // Monkeypatch tiddler loader from TW5
-  $tw.loadTiddlersFromFile = (function (original) {
-    return function (filepath, fields) {
-      var data,
-        ext = path.extname(filepath),
-        extensionInfo = $tw.config.fileExtensionInfo[ext],
-        type = extensionInfo ? extensionInfo.type : null;
+// Allow these functions to be called synchronously
+sync(dropbox, 'readdir', 'readFile', 'stat');
 
-      if (filepath.indexOf(tiddlersPathSuffix) != -1) {
-        var filename = filepath.split("/").pop(),
-          index = files.indexOf(filename);
-        data = dropboxData[index];
-      }
-
-      if (data) {
-        // Data was retrieved from Dropbox
-        var tiddlers = $tw.wiki.deserializeTiddlers(ext, data, fields);
-        return { filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: false };
-      } else {
-        // If this is not one of the user's tiddler files, or
-        // the file was not synced with Dropbox yet, load it from server
-        return original.apply(this, arguments);
-      }
-    };
-  })($tw.loadTiddlersFromFile);
-
-  // Boot the TW5 app
-  $tw.boot.boot();
-
-  // Monkeypatch the tiddler saver from the default filesystem sync adaptor
-  $tw.syncadaptor.saveTiddler = (function (original) {
-    return function (tiddler, callback) {
-      fs.writeFile = function(filepath, content, options, callback) {
-        var filepath = filepath.replace(__dirname, dropboxPath);
-        client.writeFile(filepath, content, callback);
-      };
-
-      return original.apply(this, arguments);
-    };
-  })($tw.syncadaptor.saveTiddler);
-
-  // Monkeypatch the tiddler deleter from the default filesystem sync adaptor
-  $tw.syncadaptor.deleteTiddler = (function (original) {
-    return function (title, callback, options) {
-      fs.unlink = function(filepath, callback) {
-        var filepath = filepath.replace(__dirname, dropboxPath);
-        client.unlink(filepath, callback);
-      };
-
-      return original.apply(this, arguments);
-    };
-  })($tw.syncadaptor.deleteTiddler);
+function monkeypatch(object, f, callback) {
+  object[f] = callback(object[f]);
 }
+
+// Checks if a local path should be mapped to a remote (dropbox) path
+function shouldBeRemotePath(filepath) {
+  return (filepath + "/").indexOf(tiddlersPathSuffix) != -1;
+}
+
+// Converts the local path to the remote (dropbox) path
+function toRemotePath(filepath) {
+  return filepath.replace(__dirname, dropboxPath);
+}
+
+// Monkeypatch calls to the filesystem
+// TODO Create a custom file sync adaptor for TW5 instead of monkeypatching
+monkeypatch(fs, 'readdirSync', function(original) {
+  return function (filepath) {
+    if (shouldBeRemotePath(filepath)) {
+      return dropbox.readdir(toRemotePath(filepath));
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'readdir', function(original) {
+  return function (filepath, callback) {
+    if (shouldBeRemotePath(filepath)) {
+      return dropbox.readdir(toRemotePath(filepath), callback);
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'readFileSync', function(original) {
+  return function (filepath, options) {
+    if (shouldBeRemotePath(filepath)) {
+      return dropbox.readFile(toRemotePath(filepath));
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'writeFile', function(original) {
+  return function(filepath, content, options, callback) {
+    if (shouldBeRemotePath(filepath)) {
+      return dropbox.writeFile(toRemotePath(filepath), content, callback);
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'unlink', function(original) {
+  return function(filepath, callback) {
+    if (shouldBeRemotePath(filepath)) {
+      return dropbox.unlink(toRemotePath(filepath), callback);
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'existsSync', function(original) {
+  return function (filepath) {
+    if (shouldBeRemotePath(filepath)) {
+      // Check if there is a file or folder with this name
+      // TODO Use findByName instead?
+      try { dropbox.stat(toRemotePath(filepath)); return true; }
+      catch (error) { return false; } // TODO Check error status
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
+
+monkeypatch(fs, 'statSync', function(original) {
+  return function (filepath) {
+    if (shouldBeRemotePath(filepath)) {
+      var metadata = dropbox.stat(toRemotePath(filepath));
+      metadata.isDirectory = function() { return this.isFolder; };
+      metadata.isFile = function() { return this.isFile; };
+      return metadata;
+    } else {
+      return original.apply(this, arguments);
+    }
+  };
+});
 
 // Pass the command line arguments to the boot kernel
 $tw.boot.argv = Array.prototype.slice.call(process.argv, 2);
 
-// Read user's tiddlers from Dropbox and then boot TW5
-client.readdir(dropboxPath + tiddlersPathSuffix, function (error, files) {
-  if (error) {
-    console.log(error); // Something went wrong.
-  }
-
-  var readFromDropbox = function (filename, callback) {
-    return client.readFile(dropboxPath + tiddlersPathSuffix + filename, callback);
-  };
-
-  async.map(files, readFromDropbox, function (err, dropboxData) {
-    boot(files, dropboxData);
-  });
+sync.fiber(function() {
+  $tw.boot.boot(); // Boot the TW5 app
+  console.log("Boot completed. TiddlyWiki is now serving the application.");
 });
