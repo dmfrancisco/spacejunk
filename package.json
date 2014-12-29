@@ -9,7 +9,8 @@
     "synchronize": "0.9.9"
   },
   "scripts": {
-    "start": "node app.js . --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0"
+    "start": "node app.js . --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0",
+    "local": "node app.js . --server $PORT"
   },
   "engines": {
     "node": "0.10.x"
