@@ -47,7 +47,7 @@ function toRemotePath(filepath) {
 monkeypatch(fs, 'readdirSync', function(original) {
   return function (filepath) {
     if (shouldBeRemotePath(filepath)) {
-      return dropbox.readdir(toRemotePath(filepath));
+      return dropbox.readdir(toRemotePath(filepath), { "httpCache": true });
     } else {
       return original.apply(this, arguments);
     }
@@ -57,7 +57,7 @@ monkeypatch(fs, 'readdirSync', function(original) {
 monkeypatch(fs, 'readdir', function(original) {
   return function (filepath, callback) {
     if (shouldBeRemotePath(filepath)) {
-      return dropbox.readdir(toRemotePath(filepath), callback);
+      return dropbox.readdir(toRemotePath(filepath), { "httpCache": true }, callback);
     } else {
       return original.apply(this, arguments);
     }
@@ -67,7 +67,7 @@ monkeypatch(fs, 'readdir', function(original) {
 monkeypatch(fs, 'readFileSync', function(original) {
   return function (filepath, options) {
     if (shouldBeRemotePath(filepath)) {
-      return dropbox.readFile(toRemotePath(filepath));
+      return dropbox.readFile(toRemotePath(filepath), { "httpCache": true });
     } else {
       return original.apply(this, arguments);
     }
@@ -99,7 +99,7 @@ monkeypatch(fs, 'existsSync', function(original) {
     if (shouldBeRemotePath(filepath)) {
       // Check if there is a file or folder with this name
       // TODO Use findByName instead?
-      try { dropbox.stat(toRemotePath(filepath)); return true; }
+      try { dropbox.stat(toRemotePath(filepath), { "httpCache": true }); return true; }
       catch (error) { return false; } // TODO Check error status
     } else {
       return original.apply(this, arguments);
@@ -110,7 +110,7 @@ monkeypatch(fs, 'existsSync', function(original) {
 monkeypatch(fs, 'statSync', function(original) {
   return function (filepath) {
     if (shouldBeRemotePath(filepath)) {
-      var metadata = dropbox.stat(toRemotePath(filepath));
+      var metadata = dropbox.stat(toRemotePath(filepath), { "httpCache": true });
       metadata.isDirectory = function() { return this.isFolder; };
       metadata.isFile = function() { return this.isFile; };
       return metadata;
