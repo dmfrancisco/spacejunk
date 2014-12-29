@@ -3,8 +3,10 @@
 var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
     sync = require("synchronize"),
-      fs = require("fs"),
-  config;
+    exec = require('child_process').exec,
+      fs = require("fs");
+
+var config, appname, dropboxPath, tiddlersPathSuffix = "/tiddlers/";
 
 try {
   config = require("./config.json");
@@ -19,11 +21,6 @@ var dropbox = new Dropbox.Client({
   secret: (process.env.DROPBOX_SECRET || config.dropbox.secret),
   token: (process.env.DROPBOX_TOKEN || config.dropbox.token)
 });
-
-// Path to where the files are stored
-var appname = (process.env.APP_NAME || config.appname),
-  tiddlersPathSuffix = "/tiddlers/",
-  dropboxPath = process.env.DROPBOX_PATH || config.dropbox.path || ("/Apps/Heroku/"+ appname);
 
 // Allow these functions to be called synchronously
 sync(dropbox, 'readdir', 'readFile', 'stat');
@@ -124,6 +121,15 @@ monkeypatch(fs, 'statSync', function(original) {
 $tw.boot.argv = Array.prototype.slice.call(process.argv, 2);
 
 sync.fiber(function() {
-  $tw.boot.boot(); // Boot the TW5 app
-  console.log("Boot completed. TiddlyWiki is now serving the application.");
+  // Path to where files are stored
+  appname = process.env.APP_NAME || config.appname ||
+    sync.await(exec("heroku config | head -1 | cut -d \" \" -f2", sync.defer())).trim();
+  dropboxPath = process.env.DROPBOX_PATH || config.dropbox.path || ("/Apps/Heroku/"+ appname);
+
+  console.info("Booting! Please wait...");
+
+  // Boot the TW5 app
+  $tw.boot.boot();
+
+  console.info("Boot completed. TiddlyWiki is now serving the application.");
 });
