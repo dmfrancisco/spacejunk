@@ -1,0 +1,16 @@
+title: $:/themes/spacejunk/variables/
+
+fontfamily: Helvetica Neue, Helvetica, Segoe UI, Roboto, Arial, freesans, sans-serif
+bodyfontsize: 16px
+bodylineheight: 25px
+fontsize: 16px
+lineheight: 25px
+storyleft: 0
+storyright: 0
+storytop: 0
+storywidth: auto
+sidebarbreakpoint: 1020px
+tiddlerwidth: 65%
+sidebarwidth: 32%
+pagewidth: 95%
+pagemaxwidth: 1300px
