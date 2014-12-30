@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "spacejunk --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0",
-    "local": "spacejunk --server"
+    "local": "SPACEJUNK_LOCAL=true spacejunk --server"
   },
   "engines": {
     "node": "0.10.x"
