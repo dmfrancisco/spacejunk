@@ -1,0 +1,150 @@
+title: $:/themes/spacefoam-light/styles
+tags: [[$:/tags/Stylesheet]]
+list-after: $:/themes/spacefoam-light/vanilla
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic);
+
+html {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, .tc-site-title {
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+body.tc-body {
+  background-color: <<colour tiddler-background>>;
+}
+
+.tc-page-container-wrapper {
+  margin: 0 auto;
+  max-width: {{$:/themes/spacefoam-light/variables/pagemaxwidth}};
+  width: {{$:/themes/spacefoam-light/variables/pagewidth}};
+}
+
+.tc-story-river {
+  padding: 0;
+}
+
+.tc-tiddler-frame {
+  box-shadow: none;
+  border-radius: 0;
+  border: 0;
+  border-top: 10px solid <<colour tiddler-controls-foreground>>;
+}
+
+.tc-tiddler-frame, .tc-sidebar-header {
+  padding: 1.3em 0;
+  margin: 0 0 1.3em;
+}
+
+/* Notifications */
+
+.tc-notification, .tc-dropzone.tc-dragover:before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  color: #fff;
+}
+
+.tc-notification {
+  max-width: 100%;
+  padding: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+}
+
+.tc-dropzone.tc-dragover:before {
+  height: 50px;
+  line-height: 50px;
+}
+
+/* Improvements for large screens */
+
+@media (min-width: {{$:/themes/spacefoam-light/variables/sidebarbreakpoint}}) {
+  .tc-sidebar-scrollable {
+    width: {{$:/themes/spacefoam-light/variables/sidebarwidth}};
+    height: 1px;
+    padding: 0;
+    float: right;
+    position: static;
+  }
+
+  .tc-sidebar-header {
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    padding: 3.5em 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .tc-story-river {
+    width: {{$:/themes/spacefoam-light/variables/tiddlerwidth}};
+  }
+
+<<if-no-sidebar "
+  .tc-story-river {
+    width: auto;
+  }
+">>
+
+  .tc-tiddler-frame {
+    width: 100%;
+  }
+
+  .tc-menu-list-subitem {
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Others */
+
+.tc-site-title, .tc-titlebar {
+  font-size: 2em;
+}
+
+.tc-topbar-right {
+  top: 10px;
+  right: 15px;
+}
+
+.tc-tiddler-body .tc-image-button {
+  width: 18px;
+  height: 14px;
+}
+
+.tc-tab-buttons {
+  margin-bottom: -1px;
+}
+
+.tc-sidebar-lists .tc-tab-divider {
+  border: none;
+  height: 1px;
+  width: 35%;
+  background: <<colour sidebar-tab-divider>>;
+  background: -moz-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -webkit-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -o-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -ms-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: linear-gradient(to right, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+}
