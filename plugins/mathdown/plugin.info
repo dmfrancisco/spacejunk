@@ -1,0 +1,5 @@
+{
+	"title": "$:/plugins/padawanphysicist/TW5-Mathdown",
+	"description": "Markdown plugin wrapping remarkable parser",
+	"author": "VictorSantos"
+}
