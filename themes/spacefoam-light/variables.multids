@@ -1,0 +1,18 @@
+title: $:/themes/spacefoam-light/variables/
+
+fontfamily: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif
+bodyfontsize: 18px
+bodylineheight: 24px
+fontsize: 18px
+lineheight: 24px
+storyleft: 0
+storyright: 0
+storytop: 0
+storywidth: auto
+sidebarbreakpoint: 1020px
+tiddlerwidth: 64%
+sidebarwidth: 28%
+pagewidth: 95%
+pagemaxwidth: 1300px
+gutter: 1.3em
+sidebargutter: 3.5em

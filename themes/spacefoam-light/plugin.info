@@ -1,0 +1,7 @@
+{
+	"title": "$:/themes/spacefoam-light",
+	"name": "SpaceFoam Light",
+	"core-version": ">=5.1.7",
+	"plugin-type": "theme",
+	"description": "A clean theme with borderless tiddlers"
+}
