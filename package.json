@@ -1,16 +1,13 @@
 {
-  "name": "SpaceJunk",
+  "name": "SpaceJunkApp",
   "version": "0.0.1",
-  "description": "An opinionated TiddlyWiki setup",
   "private": true,
   "dependencies": {
-    "tiddlywiki": "5.1.7",
-    "dropbox": "0.10.3",
-    "synchronize": "0.9.9"
+    "spacejunk": "dmfrancisco/spacejunk#core-package"
   },
   "scripts": {
-    "start": "node app.js . --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0",
-    "local": "node app.js . --server $PORT"
+    "start": "spacejunk --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0",
+    "local": "spacejunk --server"
   },
   "engines": {
     "node": "0.10.x"
