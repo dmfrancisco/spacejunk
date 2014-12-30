@@ -1,0 +1,18 @@
+title: $:/themes/spacefoam-light/preferences
+tags: $:/tags/ControlPanel/Appearance
+caption: ~SpaceFoam Light Preferences
+
+You can tweak certain aspects of the SpaceFoam Light theme.
+
+! Preferences
+
+* [[Font family|$:/themes/spacefoam-light/variables/fontfamily]]: <$edit-text tiddler="$:/themes/spacefoam-light/variables/fontfamily" default="" tag="input"/>
+* [[Font size|$:/themes/spacefoam-light/variables/fontsize]]: <$edit-text tiddler="$:/themes/spacefoam-light/variables/fontsize" default="" tag="input"/>
+* [[Line height|$:/themes/spacefoam-light/variables/lineheight]]: <$edit-text tiddler="$:/themes/spacefoam-light/variables/lineheight" default="" tag="input"/>
+* [[Font size for tiddler body|$:/themes/spacefoam-light/variables/bodyfontsize]]: <$edit-text tiddler="$:/themes/spacefoam-light/variables/bodyfontsize" default="" tag="input"/>
+* [[Line height for tiddler body|$:/themes/spacefoam-light/variables/bodylineheight]]: <$edit-text tiddler="$:/themes/spacefoam-light/variables/bodylineheight" default="" tag="input"/>
+* [[Page width|$:/themes/spacefoam-light/variables/pagewidth]] //(the width of the page, including the sidebar)//: <$edit-text tiddler="$:/themes/spacefoam-light/variables/pagewidth" default="" tag="input"/>
+* [[Max page width|$:/themes/spacefoam-light/variables/pagemaxwidth]] //(the maximum width of the page, including the sidebar)//: <$edit-text tiddler="$:/themes/spacefoam-light/variables/pagemaxwidth" default="" tag="input"/>
+* [[Tiddler width|$:/themes/spacefoam-light/variables/tiddlerwidth]] //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/spacefoam-light/variables/tiddlerwidth" default="" tag="input"/>
+* [[Sidebar width|$:/themes/spacefoam-light/variables/sidebarwidth]] //(the width of the sidebar when displayed in the right)//: <$edit-text tiddler="$:/themes/spacefoam-light/variables/sidebarwidth" default="" tag="input"/>
+* [[Sidebar breakpoint|$:/themes/spacefoam-light/variables/sidebarbreakpoint]] //(the minimum width for the sidebar to be displayed alongside the story river)//: <$edit-text tiddler="$:/themes/spacefoam-light/variables/sidebarbreakpoint" default="" tag="input"/>
