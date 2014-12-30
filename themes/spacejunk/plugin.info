@@ -1,0 +1,7 @@
+{
+	"title": "$:/themes/spacejunk",
+	"name": "SpaceJunk",
+	"core-version": ">=5.1.7",
+	"plugin-type": "theme",
+	"description": "A GitHub inspired theme"
+}

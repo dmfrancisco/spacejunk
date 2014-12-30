@@ -1,0 +1,204 @@
+title: $:/themes/spacejunk/styles
+tags: [[$:/tags/Stylesheet]]
+list-after: $:/themes/spacejunk/vanilla
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, .tc-site-title {
+  font-weight: 600;
+}
+
+.tc-page-container-wrapper {
+  margin: 0 auto;
+  max-width: {{$:/themes/spacejunk/variables/pagemaxwidth}};
+  width: {{$:/themes/spacejunk/variables/pagewidth}};
+}
+
+.tc-story-river {
+  padding: 20px 0;
+}
+
+.tc-tiddler-frame {
+  border: 1px solid <<colour tiddler-controls-foreground>>;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.tc-tiddler-frame > .tc-tiddler-title,
+.tc-subtitle,
+.tc-tags-wrapper {
+  background: <<colour tiddler-info-background>>;
+  margin: 0 -10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tc-tiddler-frame > .tc-tiddler-title {
+  margin-top: -10px;
+  padding-top: 10px;
+  border-radius: 3px 3px 0 0;
+}
+
+.tc-tags-wrapper {
+  padding-bottom: 10px;
+  border-bottom: 1px solid <<colour tiddler-controls-foreground>>;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tc-tiddler-body {
+  padding-top: 10px;
+}
+
+.tc-tiddler-body > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tc-tiddler-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.tc-sidebar-header {
+  padding: 20px 10px 10px;
+}
+
+/* Notifications */
+
+.tc-notification,
+.tc-dropzone.tc-dragover:before {
+  color: #fff;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.tc-notification {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  max-width: 100%;
+  padding: 0;
+  text-align: center;
+}
+
+.tc-dropzone.tc-dragover:before {
+  height: 50px;
+  line-height: 50px;
+}
+
+/* Improvements for large screens */
+
+@media (min-width: {{$:/themes/spacejunk/variables/sidebarbreakpoint}}) {
+  .tc-story-river {
+    padding: 35px 0;
+  }
+
+  .tc-tiddler-frame {
+    padding: 25px;
+    margin-bottom: 35px;
+  }
+
+  .tc-tiddler-frame > .tc-tiddler-title,
+  .tc-subtitle,
+  .tc-tags-wrapper {
+    margin: 0 -25px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .tc-tiddler-frame > .tc-tiddler-title {
+    margin-top: -25px;
+    padding-top: 15px;
+  }
+
+  .tc-tags-wrapper {
+    padding-bottom: 15px;
+  }
+
+  .tc-tiddler-body {
+    padding-top: 25px;
+  }
+
+  .tc-sidebar-scrollable {
+    float: right;
+    height: 1px;
+    padding: 0;
+    position: static;
+    width: {{$:/themes/spacejunk/variables/sidebarwidth}};
+  }
+
+  .tc-sidebar-header {
+    bottom: 0;
+    overflow-y: auto;
+    padding: 55px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .tc-story-river {
+    width: {{$:/themes/spacejunk/variables/tiddlerwidth}};
+  }
+
+<<if-no-sidebar "
+  .tc-story-river {
+    width: auto;
+  }
+">>
+
+  .tc-tiddler-frame {
+    width: auto;
+  }
+}
+
+/* Others */
+
+.tc-site-title, .tc-titlebar {
+  font-size: 1.35em;
+}
+
+.tc-topbar-right {
+  right: 15px;
+  top: 10px;
+}
+
+.tc-tab-buttons {
+  margin-bottom: -3px !important;
+}
+
+.tc-more-sidebar .tc-vertical.tc-tab-buttons button.tc-tab-selected {
+  border-top: 1px solid <<colour tab-border-selected>>;
+  border-bottom: 1px solid <<colour tab-border-selected>>;
+}
+
+.tc-tiddler-body .tc-image-button {
+  height: 14px;
+  width: 18px;
+}
+
+.tc-sidebar-lists .tc-tab-divider {
+  border: none;
+  height: 1px;
+  width: 35%;
+  background: <<colour sidebar-tab-divider>>;
+  background: -moz-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -webkit-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -o-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -ms-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: linear-gradient(to right, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+}
