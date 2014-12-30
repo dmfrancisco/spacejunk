@@ -7,6 +7,11 @@ var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
       fs = require("fs"),
     path = require("path");
 
+// If the env var SPACEJUNK_LOCAL is set, run TiddlyWiki without Dropbox sync
+if (process.env.SPACEJUNK_LOCAL == "true") {
+  return require("tiddlywiki/tiddlywiki.js");
+}
+
 var config, appname, dropboxPath, tiddlersPathSuffix = "/tiddlers/";
 
 try {
