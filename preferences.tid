@@ -1,0 +1,18 @@
+title: $:/themes/spacejunk/preferences
+tags: $:/tags/ControlPanel/Appearance
+caption: ~SpaceJunk Preferences
+
+You can tweak certain aspects of the SpaceJunk theme.
+
+! Preferences
+
+* [[Font family|$:/themes/spacejunk/variables/fontfamily]]: <$edit-text tiddler="$:/themes/spacejunk/variables/fontfamily" default="" tag="input"/>
+* [[Font size|$:/themes/spacejunk/variables/fontsize]]: <$edit-text tiddler="$:/themes/spacejunk/variables/fontsize" default="" tag="input"/>
+* [[Line height|$:/themes/spacejunk/variables/lineheight]]: <$edit-text tiddler="$:/themes/spacejunk/variables/lineheight" default="" tag="input"/>
+* [[Font size for tiddler body|$:/themes/spacejunk/variables/bodyfontsize]]: <$edit-text tiddler="$:/themes/spacejunk/variables/bodyfontsize" default="" tag="input"/>
+* [[Line height for tiddler body|$:/themes/spacejunk/variables/bodylineheight]]: <$edit-text tiddler="$:/themes/spacejunk/variables/bodylineheight" default="" tag="input"/>
+* [[Page width|$:/themes/spacejunk/variables/pagewidth]] //(the width of the page, including the sidebar)//: <$edit-text tiddler="$:/themes/spacejunk/variables/pagewidth" default="" tag="input"/>
+* [[Max page width|$:/themes/spacejunk/variables/pagemaxwidth]] //(the maximum width of the page, including the sidebar)//: <$edit-text tiddler="$:/themes/spacejunk/variables/pagemaxwidth" default="" tag="input"/>
+* [[Tiddler width|$:/themes/spacejunk/variables/tiddlerwidth]] //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/spacejunk/variables/tiddlerwidth" default="" tag="input"/>
+* [[Sidebar width|$:/themes/spacejunk/variables/sidebarwidth]] //(the width of the sidebar when displayed in the right)//: <$edit-text tiddler="$:/themes/spacejunk/variables/sidebarwidth" default="" tag="input"/>
+* [[Sidebar breakpoint|$:/themes/spacejunk/variables/sidebarbreakpoint]] //(the minimum width for the sidebar to be displayed alongside the story river)//: <$edit-text tiddler="$:/themes/spacejunk/variables/sidebarbreakpoint" default="" tag="input"/>
