@@ -4,14 +4,15 @@ var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
     sync = require("synchronize"),
     exec = require('child_process').exec,
-      fs = require("fs");
+      fs = require("fs"),
+    path = require("path");
 
 var config, appname, dropboxPath, tiddlersPathSuffix = "/tiddlers/";
 
 try {
-  config = require("./config.json");
+  config = require(path.join(process.cwd(), "config.json"));
 } catch (e) {
-  console.log("No custom configurations were found.");
+  console.info("No custom configurations were found.");
   config = { "dropbox": {} };
 }
 
@@ -36,7 +37,7 @@ function shouldBeRemotePath(filepath) {
 
 // Converts the local path to the remote (dropbox) path
 function toRemotePath(filepath) {
-  return filepath.replace(__dirname, dropboxPath);
+  return filepath.replace(process.cwd(), dropboxPath);
 }
 
 // Monkeypatch calls to the filesystem
