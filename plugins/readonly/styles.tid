@@ -1,0 +1,17 @@
+title: $:/plugins/readonly/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+<<if-readonly "
+  .tc-page-controls,
+  svg.tc-image-new-button,
+  svg.tc-image-options-button,
+  svg.tc-image-save-button,
+  svg.tc-image-edit-button,
+  svg.tc-image-delete-button,
+  svg.tc-image-cancel-button,
+  svg.tc-image-done-button {
+    display: none;
+  }
+">>
