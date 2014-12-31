@@ -1,0 +1,9 @@
+title: $:/plugins/readonly/settings
+tags: $:/tags/ControlPanel/Settings
+caption: Read-only mode
+
+If you activate the read-only mode, you will be unable to access this panel. To disable this later, visit [[this tiddler|$:/plugins/readonly/state]] and change its value. You can also edit the file directly (in the tiddlers folder) and restart your server.
+
+<$checkbox tiddler="$:/plugins/readonly/state" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/plugins/readonly/state">Read-only mode</$link> </$checkbox>
+
+Note that this only hides the edit buttons, but users may still be able to modify and delete content. Make sure to activate the read-only in your server too.
