@@ -1,0 +1,6 @@
+title: $:/plugins/readonly/macros
+tags: $:/tags/Macro
+
+\define if-readonly(css)
+<$reveal state="$:/plugins/readonly/state" type="match" text="yes" default="no">$css$</$reveal>
+\end
