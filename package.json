@@ -6,7 +6,7 @@
     "spacejunk": "dmfrancisco/spacejunk#core-package"
   },
   "scripts": {
-    "start": "spacejunk --server $PORT $:/core/save/all text/plain text/html \"\" \"\" 0.0.0.0",
+    "start": "spacejunk --server $PORT '' '' '' '' '' 0.0.0.0",
     "local": "SPACEJUNK_LOCAL=true spacejunk --server"
   },
   "engines": {
