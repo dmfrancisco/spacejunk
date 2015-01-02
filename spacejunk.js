@@ -36,8 +36,22 @@ function monkeypatch(object, f, callback) {
 }
 
 // Checks if a local path should be mapped to a remote (dropbox) path
-function shouldBeRemotePath(filepath) {
-  return (filepath + "/").indexOf(tiddlersPathSuffix) != -1;
+// @param {String} operation that will be performed (read, write or delete)
+function shouldBeRemotePath(filepath, operation) {
+  var isTiddlersPath = (filepath + "/").indexOf(tiddlersPathSuffix) != -1;
+
+  switch (operation) {
+    case "write":
+    case "delete":
+      // All visitors of the site can edit and delete tiddlers synced with Dropbox
+      return isTiddlersPath;
+    case "read":
+      // If autosync is false, users will always see the last changes that were
+      // manually synced with the Heroku server (through the Heroku Dashboard)
+      return isTiddlersPath && !(process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync == false);
+    default:
+      return isTiddlersPath;
+  }
 }
 
 // Converts the local path to the remote (dropbox) path
@@ -49,7 +63,7 @@ function toRemotePath(filepath) {
 // TODO Create a custom file sync adaptor for TW5 instead of monkeypatching
 monkeypatch(fs, 'readdirSync', function(original) {
   return function (filepath) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "read")) {
       return dropbox.readdir(toRemotePath(filepath), { "httpCache": true });
     } else {
       return original.apply(this, arguments);
@@ -59,7 +73,7 @@ monkeypatch(fs, 'readdirSync', function(original) {
 
 monkeypatch(fs, 'readdir', function(original) {
   return function (filepath, callback) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "read")) {
       return dropbox.readdir(toRemotePath(filepath), { "httpCache": true }, callback);
     } else {
       return original.apply(this, arguments);
@@ -69,7 +83,7 @@ monkeypatch(fs, 'readdir', function(original) {
 
 monkeypatch(fs, 'readFileSync', function(original) {
   return function (filepath, options) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "read")) {
       return dropbox.readFile(toRemotePath(filepath), { "httpCache": true });
     } else {
       return original.apply(this, arguments);
@@ -79,7 +93,7 @@ monkeypatch(fs, 'readFileSync', function(original) {
 
 monkeypatch(fs, 'writeFile', function(original) {
   return function(filepath, content, options, callback) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "write")) {
       return dropbox.writeFile(toRemotePath(filepath), content, callback);
     } else {
       return original.apply(this, arguments);
@@ -89,7 +103,7 @@ monkeypatch(fs, 'writeFile', function(original) {
 
 monkeypatch(fs, 'unlink', function(original) {
   return function(filepath, callback) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "delete")) {
       return dropbox.unlink(toRemotePath(filepath), callback);
     } else {
       return original.apply(this, arguments);
@@ -99,7 +113,7 @@ monkeypatch(fs, 'unlink', function(original) {
 
 monkeypatch(fs, 'existsSync', function(original) {
   return function (filepath) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "read")) {
       // Check if there is a file or folder with this name
       // TODO Use findByName instead?
       try { dropbox.stat(toRemotePath(filepath), { "httpCache": true }); return true; }
@@ -112,7 +126,7 @@ monkeypatch(fs, 'existsSync', function(original) {
 
 monkeypatch(fs, 'statSync', function(original) {
   return function (filepath) {
-    if (shouldBeRemotePath(filepath)) {
+    if (shouldBeRemotePath(filepath, "read")) {
       var metadata = dropbox.stat(toRemotePath(filepath), { "httpCache": true });
       metadata.isDirectory = function() { return this.isFolder; };
       metadata.isFile = function() { return this.isFile; };
@@ -136,6 +150,31 @@ sync.fiber(function() {
 
   // Boot the TW5 app
   $tw.boot.boot();
+
+  // If autosync is off, make changes to Dropbox but don't update anything in the server
+  if (process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync == false) {
+    monkeypatch($tw.wiki, 'addTiddler', function(original) {
+      return function (tiddler) {
+        if (!(tiddler instanceof $tw.Tiddler)) {
+          tiddler = new $tw.Tiddler(tiddler);
+        }
+        if (tiddler) {
+          var title = tiddler.fields.title;
+          if (title) {
+            // tiddlers[title] = tiddler; this.clearCache(title); this.clearGlobalCache();
+            this.enqueueTiddlerEvent(title);
+          }
+        }
+      };
+    });
+
+    monkeypatch($tw.wiki, 'deleteTiddler', function(original) {
+      return function (title) {
+        // delete tiddlers[title]; this.clearCache(title); this.clearGlobalCache();
+        this.enqueueTiddlerEvent(title, true);
+      };
+    });
+  }
 
   console.info("Boot completed. TiddlyWiki is now serving the application.");
 });
