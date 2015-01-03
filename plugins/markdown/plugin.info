@@ -1,4 +1,4 @@
 {
   "title": "$:/plugins/markdown",
-  "description": "Adds support for Markdown"
+  "description": "Adds support for Markdown using Remarkable (emojis by Twitter are licensed under CC-BY 4.0)"
 }
