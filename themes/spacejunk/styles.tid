@@ -166,6 +166,45 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   }
 }
 
+/* Links */
+
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink:hover,
+.tc-tiddler-body a.tc-tiddlylink:visited,
+.tc-tiddler-body button.tc-tiddlylink,
+.tc-tiddler-body button.tc-tiddlylink:hover,
+.tc-tiddler-body button.tc-tiddlylink:visited {
+  color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-tiddler-body a {
+  text-decoration: none;
+  color: <<colour external-link-foreground>>;
+  background-color: <<colour external-link-background>>;
+}
+
+.tc-tiddler-body a:hover {
+  text-decoration: underline;
+  color: <<colour external-link-foreground-hover>>;
+  background-color: <<colour external-link-background-hover>>;
+}
+
+.tc-tiddler-body a:visited {
+  text-decoration: none;
+  color: <<colour external-link-foreground-visited>>;
+  background-color: <<colour external-link-background-visited>>;
+}
+
+/* Content */
+
+.tc-tiddler-body hr {
+  border: 3px solid <<colour sidebar-tab-divider>>;
+}
+
+pre, code {
+  border: none;
+}
+
 /* Others */
 
 .tc-site-title, .tc-titlebar {
