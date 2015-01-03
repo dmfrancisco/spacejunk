@@ -42,8 +42,20 @@ Adds support for Markdown using Remarkable. Based on TW5-Mathdown by Victor Sant
     });
   } catch (err) {}
 
+  var twemoji = require("$:/plugins/markdown/twemoji.npm.js"),
+    emojiMap = require("$:/plugins/markdown/emojimap.js"),
+    emojiRe = new RegExp(Object.keys(emojiMap).join("|"), "g");
+
+  function parseEmoji(text) {
+    // Map emoji codes to unicode characters
+    var out = text.replace(emojiRe, function (matched) { return emojiMap[matched]; });
+
+    // Map unicode characters to twitter emoji images
+    return twemoji.parse(out, { size: 72 });
+  }
+
   var MarkdownParser = function(type, text, options) {
-    var html = markdown.render(text);
+    var html = markdown.render(parseEmoji(text));
     this.tree = [{ type: "raw", html: html }];
   };
 

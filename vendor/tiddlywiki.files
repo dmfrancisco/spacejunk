@@ -7,6 +7,21 @@
         "title": "$:/plugins/markdown/remarkable.js",
         "module-type": "library"
       }
+    }, {
+      "file": "twemoji.npm.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/markdown/twemoji.npm.js",
+        "module-type": "library"
+      },
+      "prefix": "var global = {};"
+    }, {
+      "file": "emojimap.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/markdown/emojimap.js",
+        "module-type": "library"
+      }
     }
   ]
 }
