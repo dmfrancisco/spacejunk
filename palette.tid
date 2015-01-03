@@ -26,9 +26,9 @@ dropzone-background: <<colour foreground>>
 external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
-external-link-foreground-hover: inherit
-external-link-foreground-visited: #e63a3a
-external-link-foreground: #e63a3a
+external-link-foreground-hover: #03a9f4
+external-link-foreground-visited: #1976d2
+external-link-foreground: #03a9f4
 foreground: #333333
 message-background: #ecf2ff
 message-border: #cfd6e6
