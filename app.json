@@ -1,6 +1,6 @@
 {
   "name": "SpaceJunk",
-  "description": "Create your own personal web notebook using TiddlyWiki (the free and open source project), Heroku (the free cloud platform where your notebook lives) and Dropbox (the free file hosting service where your content is stored). Please fill all fields below and click \"Deploy for Free\". After being greeted with the message \"Your app was successfully deployed\", please follow the link \"Make your first edit\" to connect your new Heroku app with your Dropbox account.",
+  "description": "Create your own space using TiddlyWiki, Heroku & Dropbox. Please continue following the instructions on tryspacejunk.herokuapp.com/#Welcome",
   "env": {
     "APP_NAME": {
       "description": "The App Name you chose above. Please make sure you fill that field and that it matches this one (despite being optional for the Heroku platform, it is required for the app to work)."
