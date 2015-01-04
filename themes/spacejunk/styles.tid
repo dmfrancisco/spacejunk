@@ -64,14 +64,6 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   padding-top: 10px;
 }
 
-.tc-tiddler-body > *:first-child {
-  margin-top: 0 !important;
-}
-
-.tc-tiddler-body > *:last-child {
-  margin-bottom: 0 !important;
-}
-
 .tc-sidebar-header {
   padding: 20px 10px 10px;
 }
@@ -195,14 +187,81 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   background-color: <<colour external-link-background-visited>>;
 }
 
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: <<colour foreground>> !important;
+  font-weight: 600 !important;
+}
+
+/* Code */
+
+pre, code {
+  border: none;
+}
+
+pre, pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+pre code {
+  display: inline;
+}
+
 /* Content */
+
+.tc-tiddler-body > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tc-tiddler-body > *:last-child {
+  margin-bottom: 0 !important;
+}
 
 .tc-tiddler-body hr {
   border: 3px solid <<colour sidebar-tab-divider>>;
 }
 
-pre, code {
+.tc-toc {
+  margin: 0;
+}
+
+/* Sidebar */
+
+.tc-sidebar-lists .tc-tab-buttons {
+  padding-top: 20px;
+  margin-bottom: -3px !important;
+}
+
+.tc-sidebar-lists .tc-more-sidebar .tc-vertical.tc-tab-buttons button.tc-tab-selected {
+  border-top: 1px solid <<colour tab-border-selected>>;
+  border-bottom: 1px solid <<colour tab-border-selected>>;
+}
+
+.tc-sidebar-lists .tc-search input[type=search] {
+  min-width: 189px;
+  height: 24px;
+}
+
+.tc-sidebar-lists button svg.tc-image-advanced-search-button {
+  height: 1.3em;
+  width: 1.3em;
+  margin-left: 5px;
+}
+
+.tc-sidebar-lists .tc-tab-divider {
   border: none;
+  height: 1px;
+  width: 35%;
+  background: <<colour sidebar-tab-divider>>;
+  background: -moz-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -webkit-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -o-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: -ms-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
+  background: linear-gradient(to right, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
 }
 
 /* Others */
@@ -216,28 +275,7 @@ pre, code {
   top: 10px;
 }
 
-.tc-tab-buttons {
-  margin-bottom: -3px !important;
-}
-
-.tc-more-sidebar .tc-vertical.tc-tab-buttons button.tc-tab-selected {
-  border-top: 1px solid <<colour tab-border-selected>>;
-  border-bottom: 1px solid <<colour tab-border-selected>>;
-}
-
 .tc-tiddler-body .tc-image-button {
   height: 14px;
   width: 18px;
-}
-
-.tc-sidebar-lists .tc-tab-divider {
-  border: none;
-  height: 1px;
-  width: 35%;
-  background: <<colour sidebar-tab-divider>>;
-  background: -moz-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
-  background: -webkit-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
-  background: -o-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
-  background: -ms-linear-gradient(left, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
-  background: linear-gradient(to right, <<colour sidebar-tab-divider>> 0%, <<colour page-background>> 100%);
 }
