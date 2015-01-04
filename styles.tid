@@ -195,6 +195,11 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   background-color: <<colour external-link-background-visited>>;
 }
 
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: <<colour foreground>> !important;
+  font-weight: 600 !important;
+}
+
 /* Code */
 
 pre, code {
