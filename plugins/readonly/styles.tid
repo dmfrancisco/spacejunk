@@ -14,4 +14,10 @@ tags: [[$:/tags/Stylesheet]]
   svg.tc-image-done-button {
     display: none;
   }
+
+  /* Hide the last two sidebar tabs, which usually are 'Tools' and 'More' */
+  .tc-sidebar-lists .tc-tab-buttons > button:nth-last-child(-n+2),
+  .tc-sidebar-lists .tc-tab-content > .tc-reveal:nth-last-child(-n+2) {
+    display: none;
+  }
 ">>
