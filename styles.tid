@@ -195,14 +195,29 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   background-color: <<colour external-link-background-visited>>;
 }
 
+/* Code */
+
+pre, code {
+  border: none;
+}
+
+pre, pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+pre code {
+  display: inline;
+}
+
 /* Content */
 
 .tc-tiddler-body hr {
   border: 3px solid <<colour sidebar-tab-divider>>;
-}
-
-pre, code {
-  border: none;
 }
 
 /* Others */
