@@ -104,7 +104,9 @@ monkeypatch(fs, 'writeFile', function(original) {
 monkeypatch(fs, 'unlink', function(original) {
   return function(filepath, callback) {
     if (shouldBeRemotePath(filepath, "delete")) {
-      return dropbox.unlink(toRemotePath(filepath), callback);
+      // This operation may fail sometimes due to parallel requests
+      try { return dropbox.unlink(toRemotePath(filepath), callback); }
+      catch (error) { console.error("Unable to unlink file from Dropbox."); }
     } else {
       return original.apply(this, arguments);
     }
