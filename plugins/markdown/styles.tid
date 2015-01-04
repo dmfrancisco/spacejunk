@@ -1,6 +1,14 @@
 title: $:/plugins/markdown/styles
 tags: [[$:/tags/Stylesheet]]
 
+.tc-tiddler-body > div > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tc-tiddler-body > div > *:last-child {
+  margin-bottom: 0 !important;
+}
+
 img.emoji {
    /* Size the emoji according to the surrounding text */
    height: 1em;
