@@ -193,7 +193,8 @@ pre code {
 
 /* Dropdowns */
 
-.tc-drop-down {
+.tc-drop-down,
+.tc-block-dropdown {
   font-weight: normal;
   font-size: 16px;
   padding: 0;
@@ -204,6 +205,7 @@ pre code {
     inset -1px -1px 1px 0 rgba(0,0,0,.03);
   overflow: hidden;
   min-width: 170px;
+  margin-top: 8px;
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -222,7 +224,8 @@ pre code {
 
 .tc-drop-down a:hover,
 .tc-drop-down button:hover,
-.tc-drop-down .tc-file-input-wrapper:hover button {
+.tc-drop-down .tc-file-input-wrapper:hover button,
+.tc-block-dropdown a:hover {
   color: <<colour foreground>>;
   background-color: <<colour tiddler-info-background>>;
   text-decoration: none;
