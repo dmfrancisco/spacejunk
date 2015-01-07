@@ -4,6 +4,7 @@ tags: [[$:/tags/Stylesheet]]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 <<if-readonly "
+  /* Default buttons for editing and configurations */
   .tc-page-controls,
   svg.tc-image-new-button,
   svg.tc-image-options-button,
@@ -13,6 +14,21 @@ tags: [[$:/tags/Stylesheet]]
   svg.tc-image-cancel-button,
   svg.tc-image-done-button {
     display: none;
+  }
+
+  /* Page Toolbar buttons you should hide by removing them from the 'More' section */
+  html svg.tc-image-info-button,
+  html svg.tc-image-new-here-button,
+  html svg.tc-image-new-journal-button,
+  html svg.tc-clone-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Remove some space that is left after hiding the buttons */
+  html .tc-tiddler-controls > span > button {
+    margin-left: 0;
   }
 
   /* Hide the last two sidebar tabs, which usually are 'Tools' and 'More' */
