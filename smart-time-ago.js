@@ -72,11 +72,11 @@ module-type: widget
   };
 
   $tw.utils.getValueAsSmartDate = function(date, format) {
-    // Based on code from "JavaScript Pretty Date" by John Resig
-    var diff = (((new Date()).getTime() - date.getTime()) / 1000),
-      day_diff = Math.floor(diff / 86400);
-
     if (date && $tw.utils.isDate(date) && date.toString() !== "Invalid Date") {
+      // Based on code from "JavaScript Pretty Date" by John Resig
+      var diff = (((new Date()).getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+
       // Only show relative timestamps for dates that are at most one month away
       if (day_diff < 31) {
         return $tw.utils.getRelativeDate((new Date()) - (new Date(date))).description;
