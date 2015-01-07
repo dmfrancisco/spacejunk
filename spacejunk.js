@@ -7,18 +7,24 @@ var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
       fs = require("fs"),
     path = require("path");
 
-// If the env var SPACEJUNK_LOCAL is set, run TiddlyWiki without Dropbox sync
-if (process.env.SPACEJUNK_LOCAL == "true") {
-  return require("tiddlywiki/tiddlywiki.js");
-}
-
 var config, appname, dropboxPath, tiddlersPathSuffix = "/tiddlers/";
 
 try {
   config = require(path.join(process.cwd(), "config.json"));
 } catch (e) {
   console.info("No custom configurations were found.");
-  config = { "dropbox": {} };
+  config = {};
+} finally {
+  config.dropbox = config.dropbox || {};
+  config.auth = config.auth || {};
+}
+
+// Pass the command line arguments to the boot kernel
+$tw.boot.argv = Array.prototype.slice.call(process.argv, 2);
+
+// If the env var SPACEJUNK_LOCAL is set, run TiddlyWiki without Dropbox sync
+if (process.env.SPACEJUNK_LOCAL == "true") {
+  return $tw.boot.boot();
 }
 
 // Create a volume with your credentials
@@ -138,9 +144,6 @@ monkeypatch(fs, 'statSync', function(original) {
     }
   };
 });
-
-// Pass the command line arguments to the boot kernel
-$tw.boot.argv = Array.prototype.slice.call(process.argv, 2);
 
 sync.fiber(function() {
   // Path to where files are stored
