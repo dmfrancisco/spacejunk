@@ -1,0 +1,10 @@
+title: $:/core/ui/ViewTemplate/subtitle
+tags: $:/tags/ViewTemplate
+
+<div class="tc-subtitle">
+  <$link to={{!!modifier}}>
+    <$view field="modifier"/>
+  </$link>
+
+  <$smart-time-ago field="modified" format="MMM DD, YYYY"/>
+</div>
