@@ -1,9 +1,8 @@
 title: $:/themes/spacejunk/vanilla
 tags: [[$:/tags/Stylesheet]]
+list-after: $:/themes/spacejunk/normalize
 
 /* Styles from the Vanilla default theme (all variables were renamed) */
-
-{{$:/themes/spacejunk/reset}}
 
 *, input[type="search"] {
   box-sizing: border-box;

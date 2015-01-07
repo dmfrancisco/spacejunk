@@ -4,6 +4,8 @@ list-after: $:/themes/spacejunk/vanilla
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
+/* Custom styles (some from skeleton framework: getskeleton.com) */
+
 html {
   box-sizing: border-box;
 }
@@ -16,9 +18,248 @@ html {
   outline: none;
 }
 
+img {
+  max-width: 100%;
+}
+
+/* Buttons */
+
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  color: #555;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  border-bottom-color: #cfcfcf;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,.03),
+    inset -1px -1px 1px 0 rgba(0,0,0,.03);
+}
+
+.tc-btn-invisible,
+.tc-tab-buttons button {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Tags */
+
+button.tc-tag-label,
+span.tc-tag-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 3px 5px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: 1px solid <<colour tag-background>>;
+}
+
+/* Tables */
+
+table {
+  border: none;
+}
+
+table thead tr td,
+table th {
+  background-color: transparent;
+}
+
+table th,
+table td,
+.tc-control-panel td {
+  padding: 10px 12px;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid <<colour table-border>>;
+}
+
+table th:first-child,
+table td:first-child {
+  padding-left: 0;
+}
+
+table th:last-child,
+table td:last-child {
+  padding-right: 0;
+}
+
+/* Forms */
+
+input:not([type]),
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: 32px;
+  padding: 6px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,.02);
+  box-sizing: border-box;
+}
+
+select {
+  border: 1px solid #ddd;
+  border-bottom-color: #cfcfcf;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,.03),
+    inset -1px -1px 1px 0 rgba(0,0,0,.03);
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
 h1, h2, h3, h4, h5, h6, .tc-site-title {
   font-weight: 600;
 }
+
+/* Links */
+
+.tc-tiddler-body a.tc-tiddlylink,
+.tc-tiddler-body a.tc-tiddlylink:hover,
+.tc-tiddler-body a.tc-tiddlylink:visited,
+.tc-tiddler-body button.tc-tiddlylink,
+.tc-tiddler-body button.tc-tiddlylink:hover,
+.tc-tiddler-body button.tc-tiddlylink:visited {
+  color: <<colour tiddler-link-foreground>>;
+}
+
+.tc-tiddler-body a {
+  text-decoration: none;
+  color: <<colour external-link-foreground>>;
+  background-color: <<colour external-link-background>>;
+}
+
+.tc-tiddler-body a:hover {
+  text-decoration: underline;
+  color: <<colour external-link-foreground-hover>>;
+  background-color: <<colour external-link-background-hover>>;
+}
+
+.tc-tiddler-body a:visited {
+  text-decoration: none;
+  color: <<colour external-link-foreground-visited>>;
+  background-color: <<colour external-link-background-visited>>;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: <<colour foreground>> !important;
+  font-weight: 600 !important;
+}
+
+/* Code */
+
+pre, code {
+  border: none;
+}
+
+pre, pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+pre code {
+  display: inline;
+}
+
+/* Dropdowns */
+
+.tc-drop-down {
+  font-weight: normal;
+  font-size: 16px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-bottom-color: #cfcfcf;
+  border-radius: 3px;
+  box-shadow: 0 2px 1px 0 rgba(0,0,0,.03),
+    inset -1px -1px 1px 0 rgba(0,0,0,.03);
+  overflow: hidden;
+  min-width: 170px;
+}
+
+.tc-tiddler-controls .tc-drop-down {
+  font-size: 16px;
+}
+
+.tc-drop-down a,
+.tc-drop-down button {
+  padding: 4px 40px 4px 10px;
+}
+
+.tc-drop-down a svg,
+.tc-drop-down button svg {
+  margin-top: -3px;
+}
+
+.tc-drop-down a:hover,
+.tc-drop-down button:hover,
+.tc-drop-down .tc-file-input-wrapper:hover button {
+  color: <<colour foreground>>;
+  background-color: <<colour tiddler-info-background>>;
+  text-decoration: none;
+}
+
+.tc-drop-down hr {
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Content */
+
+.tc-tiddler-body > *:first-child {
+  margin-top: 0 !important;
+}
+
+.tc-tiddler-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.tc-tiddler-body hr {
+  border: 3px solid <<colour sidebar-tab-divider>>;
+}
+
+.tc-tiddler-body blockquote {
+  border-left-color: <<colour tiddler-info-border>>;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 15px;
+  color: <<colour tab-foreground>>;
+}
+
+.tc-toc {
+  margin: 0;
+}
+
+/* Stories */
 
 .tc-page-container-wrapper {
   margin: 0 auto;
@@ -27,11 +268,13 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
 }
 
 .tc-story-river {
-  padding: 20px 0;
+  padding: 20px 10px;
 }
 
 .tc-tiddler-frame {
-  border: 1px solid <<colour tiddler-controls-foreground>>;
+  border: 1px solid #ddd;
+  border-bottom-color: #cfcfcf;
+  box-shadow: 0 1px 3px 0 #f0f0f0;
   border-radius: 3px;
   padding: 10px;
   margin-bottom: 20px;
@@ -97,7 +340,7 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
 
 @media (min-width: {{$:/themes/spacejunk/variables/sidebarbreakpoint}}) {
   .tc-story-river {
-    padding: 35px 0;
+    padding: 35px 20px;
   }
 
   .tc-tiddler-frame {
@@ -158,82 +401,10 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
   }
 }
 
-/* Links */
-
-.tc-tiddler-body a.tc-tiddlylink,
-.tc-tiddler-body a.tc-tiddlylink:hover,
-.tc-tiddler-body a.tc-tiddlylink:visited,
-.tc-tiddler-body button.tc-tiddlylink,
-.tc-tiddler-body button.tc-tiddlylink:hover,
-.tc-tiddler-body button.tc-tiddlylink:visited {
-  color: <<colour tiddler-link-foreground>>;
-}
-
-.tc-tiddler-body a {
-  text-decoration: none;
-  color: <<colour external-link-foreground>>;
-  background-color: <<colour external-link-background>>;
-}
-
-.tc-tiddler-body a:hover {
-  text-decoration: underline;
-  color: <<colour external-link-foreground-hover>>;
-  background-color: <<colour external-link-background-hover>>;
-}
-
-.tc-tiddler-body a:visited {
-  text-decoration: none;
-  color: <<colour external-link-foreground-visited>>;
-  background-color: <<colour external-link-background-visited>>;
-}
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  color: <<colour foreground>> !important;
-  font-weight: 600 !important;
-}
-
-/* Code */
-
-pre, code {
-  border: none;
-}
-
-pre, pre code {
-  word-wrap: normal;
-  white-space: pre;
-}
-
-pre {
-  overflow-x: auto;
-}
-
-pre code {
-  display: inline;
-}
-
-/* Content */
-
-.tc-tiddler-body > *:first-child {
-  margin-top: 0 !important;
-}
-
-.tc-tiddler-body > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.tc-tiddler-body hr {
-  border: 3px solid <<colour sidebar-tab-divider>>;
-}
-
-.tc-toc {
-  margin: 0;
-}
-
 /* Sidebar */
 
 .tc-sidebar-lists .tc-tab-buttons {
-  padding-top: 20px;
-  margin-bottom: -3px !important;
+  padding-top: 18px;
 }
 
 .tc-sidebar-lists .tc-more-sidebar .tc-vertical.tc-tab-buttons button.tc-tab-selected {
@@ -243,7 +414,6 @@ pre code {
 
 .tc-sidebar-lists .tc-search input[type=search] {
   min-width: 189px;
-  height: 24px;
 }
 
 .tc-sidebar-lists button svg.tc-image-advanced-search-button {
@@ -265,6 +435,10 @@ pre code {
 }
 
 /* Others */
+
+.tc-tab-buttons {
+  margin-bottom: -3px !important;
+}
 
 .tc-site-title, .tc-titlebar {
   font-size: 1.35em;
