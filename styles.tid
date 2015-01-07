@@ -262,6 +262,13 @@ pre code {
   margin: 0;
 }
 
+/* The username of the modifier of a tiddler */
+.tc-subtitle a.tc-tiddlylink {
+  font-weight: normal;
+  font-style: normal;
+  color: <<colour tiddler-subtitle-foreground>>;
+}
+
 /* Stories */
 
 .tc-page-container-wrapper {
