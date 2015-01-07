@@ -30,12 +30,19 @@ module-type: widget
     var domNode = this.document.createElement("time");
 
     // Set attributes
-    domNode.innerHTML = this.text;
-    domNode.setAttribute("datetime", this.datetime);
+    domNode.innerHTML = this.title;
 
-    if (this.text != this.title) {
-      domNode.setAttribute("title", this.title);
-      domNode.className = "relative";
+    if (!domNode.isRaw) {
+      // Need to learn more to understand this, but it seems changing innerHTML
+      // turns the isRaw flag on (which disables setAttribute). For now, this
+      // works both in browser & static exports (an absolute timestamp is shown)
+      domNode.innerHTML = this.text;
+      domNode.setAttribute("datetime", this.datetime);
+
+      if (this.text != this.title) {
+        domNode.setAttribute("title", this.title);
+        domNode.className = "relative";
+      }
     }
 
     // Insert element
