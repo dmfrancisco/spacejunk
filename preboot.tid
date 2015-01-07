@@ -1,0 +1,22 @@
+title: $:/plugins/prettyurls/preboot.js
+tags: $:/core/wiki/rawmarkup
+type: text/plain
+
+<script>
+  $tw = Object.create(null);
+  $tw.utils = { getLocationHash: {} };
+
+  // Prevent TiddlyWiki from changing this later on startup
+  Object.defineProperty($tw.utils, "getLocationHash", {
+    get: function() {
+      return function() {
+        var parts = window.location.href.split('#');
+        var hash = "#" + (parts.length > 1 ? parts[1] : "");
+        return hash.replace(/\+/g, '%20').replace(/\$\_\//g, encodeURIComponent("$:/"));
+      };
+    },
+    set: function(val) {
+      return null;
+    }
+  });
+</script>
