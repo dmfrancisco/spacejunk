@@ -20,4 +20,12 @@ tags: [[$:/tags/Stylesheet]]
   .tc-sidebar-lists .tc-tab-content > .tc-reveal:nth-last-child(-n+2) {
     display: none;
   }
+
+  /* Hide the 'System' and 'Shadows' tabs from Advanced search */
+  .tc-advanced-search .tc-tab-buttons > button:nth-child(2),
+  .tc-advanced-search .tc-tab-content > .tc-reveal:nth-child(2),
+  .tc-advanced-search .tc-tab-buttons > button:nth-child(3),
+  .tc-advanced-search .tc-tab-content > .tc-reveal:nth-child(3) {
+    display: none;
+  }
 ">>
