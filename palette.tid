@@ -74,7 +74,7 @@ table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
 tag-background: #ec6
-tag-foreground: #ffffff
+tag-foreground: <<colour foreground>>
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888
@@ -85,7 +85,7 @@ tiddler-editor-border-image: #ffffff
 tiddler-editor-border: #cccccc
 tiddler-editor-fields-even: #e0e8e0
 tiddler-editor-fields-odd: #f0f4f0
-tiddler-info-background: #f7f7f7
+tiddler-info-background: #f7f7f9
 tiddler-info-border: #dddddd
 tiddler-info-tab-background: #f7f7f7
 tiddler-link-background: <<colour background>>
