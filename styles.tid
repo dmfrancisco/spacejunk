@@ -145,23 +145,32 @@ h1, h2, h3, h4, h5, h6, .tc-site-title {
 .tc-tiddler-body a.tc-tiddlylink:visited,
 .tc-tiddler-body button.tc-tiddlylink,
 .tc-tiddler-body button.tc-tiddlylink:hover,
-.tc-tiddler-body button.tc-tiddlylink:visited {
+.tc-tiddler-body button.tc-tiddlylink:visited,
+.tc-tiddler-preview-preview a.tc-tiddlylink,
+.tc-tiddler-preview-preview a.tc-tiddlylink:hover,
+.tc-tiddler-preview-preview a.tc-tiddlylink:visited,
+.tc-tiddler-preview-preview button.tc-tiddlylink,
+.tc-tiddler-preview-preview button.tc-tiddlylink:hover,
+.tc-tiddler-preview-preview button.tc-tiddlylink:visited {
   color: <<colour tiddler-link-foreground>>;
 }
 
-.tc-tiddler-body a {
+.tc-tiddler-body a,
+.tc-tiddler-preview-preview a {
   text-decoration: none;
   color: <<colour external-link-foreground>>;
   background-color: <<colour external-link-background>>;
 }
 
-.tc-tiddler-body a:hover {
+.tc-tiddler-body a:hover,
+.tc-tiddler-preview-preview a:hover {
   text-decoration: underline;
   color: <<colour external-link-foreground-hover>>;
   background-color: <<colour external-link-background-hover>>;
 }
 
-.tc-tiddler-body a:visited {
+.tc-tiddler-body a:visited,
+.tc-tiddler-preview-preview a:visited {
   text-decoration: none;
   color: <<colour external-link-foreground-visited>>;
   background-color: <<colour external-link-background-visited>>;
@@ -172,9 +181,21 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: 600 !important;
 }
 
+.tc-tiddler-body a.tc-tiddlylink.tc-plugin-info:hover {
+  text-decoration: none;
+  background-color: <<colour primary>>;
+  color: <<colour background>>;
+  fill: <<colour foreground>>;
+}
+
+.tc-tiddler-body a.tc-tiddlylink.tc-plugin-info:hover svg {
+  fill: <<colour foreground>>;
+}
+
 /* Code */
 
 pre, code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   border: none;
 }
 
@@ -184,6 +205,7 @@ pre, pre code {
 }
 
 pre {
+  padding: 10px;
   overflow-x: auto;
 }
 
@@ -238,19 +260,23 @@ pre code {
 
 /* Content */
 
-.tc-tiddler-body > *:first-child {
+.tc-tiddler-body > *:first-child,
+.tc-tiddler-preview-preview > *:first-child {
   margin-top: 0 !important;
 }
 
-.tc-tiddler-body > *:last-child {
+.tc-tiddler-body > *:last-child,
+.tc-tiddler-preview-preview > *:last-child {
   margin-bottom: 0 !important;
 }
 
-.tc-tiddler-body hr {
+.tc-tiddler-body hr,
+.tc-tiddler-preview-preview hr {
   border: 3px solid <<colour sidebar-tab-divider>>;
 }
 
-.tc-tiddler-body blockquote {
+.tc-tiddler-body blockquote,
+.tc-tiddler-preview-preview blockquote {
   border-left-color: <<colour tiddler-info-border>>;
   margin-left: 0;
   margin-right: 0;
@@ -267,6 +293,14 @@ pre code {
   font-weight: normal;
   font-style: normal;
   color: <<colour tiddler-subtitle-foreground>>;
+}
+
+/* Tiddlers that consist of a single image */
+.tc-tiddler-body > img:only-child {
+  padding-bottom: 3px;
+  margin: -25px -25px -35px !important;
+  width: calc(100% + 50px);
+  max-width: none;
 }
 
 /* Stories */
@@ -459,7 +493,14 @@ pre code {
   top: 10px;
 }
 
-.tc-tiddler-body .tc-image-button {
+.tc-tiddler-body .tc-image-button,
+.tc-tiddler-preview-preview .tc-image-button {
   height: 14px;
   width: 18px;
+}
+
+.tc-tiddler-preview-preview {
+  border: none;
+  margin: 0;
+  padding: 0;
 }
