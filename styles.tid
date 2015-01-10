@@ -181,6 +181,17 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: 600 !important;
 }
 
+.tc-tiddler-body a.tc-tiddlylink.tc-plugin-info:hover {
+  text-decoration: none;
+  background-color: <<colour primary>>;
+  color: <<colour background>>;
+  fill: <<colour foreground>>;
+}
+
+.tc-tiddler-body a.tc-tiddlylink.tc-plugin-info:hover svg {
+  fill: <<colour foreground>>;
+}
+
 /* Code */
 
 pre, code {
