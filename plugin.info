@@ -1,0 +1,4 @@
+{
+  "title": "$:/plugins/codemirror-markdown",
+  "description": "Adds Markdown mode to the CodeMirror editor"
+}
