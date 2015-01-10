@@ -54,7 +54,7 @@ function shouldBeRemotePath(filepath, operation) {
     case "read":
       // If autosync is false, users will always see the last changes that were
       // manually synced with the Heroku server (through the Heroku Dashboard)
-      return isTiddlersPath && !(process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync == false);
+      return isTiddlersPath && !(process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync === false);
     default:
       return isTiddlersPath;
   }
@@ -157,7 +157,7 @@ sync.fiber(function() {
   $tw.boot.boot();
 
   // If autosync is off, make changes to Dropbox but don't update anything in the server
-  if (process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync == false) {
+  if (process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync === false) {
     monkeypatch($tw.wiki, 'addTiddler', function(original) {
       return function (tiddler) {
         if (!(tiddler instanceof $tw.Tiddler)) {
