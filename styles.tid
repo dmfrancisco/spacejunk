@@ -295,6 +295,14 @@ pre code {
   color: <<colour tiddler-subtitle-foreground>>;
 }
 
+/* Tiddlers that consist of a single image */
+.tc-tiddler-body > img:only-child {
+  padding-bottom: 3px;
+  margin: -25px -25px -35px !important;
+  width: calc(100% + 50px);
+  max-width: none;
+}
+
 /* Stories */
 
 .tc-page-container-wrapper {
