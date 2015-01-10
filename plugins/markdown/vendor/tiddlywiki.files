@@ -1,10 +1,10 @@
 {
   "tiddlers": [
     {
-      "file": "remarkable.js",
+      "file": "marked.js",
       "fields": {
         "type": "application/javascript",
-        "title": "$:/plugins/markdown/remarkable.js",
+        "title": "$:/plugins/markdown/marked.js",
         "module-type": "library"
       }
     }, {
