@@ -1,7 +1,7 @@
 title: $:/plugins/codemirror-markdown/theme
 tags: [[$:/tags/Stylesheet]]
 
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700);
 
 .cm-s-spacejunk-solarized.CodeMirror {
   font-family: 'Source Code Pro', monospace;
