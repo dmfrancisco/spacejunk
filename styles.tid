@@ -10,10 +10,14 @@ tags: [[$:/tags/Stylesheet]]
   svg.tc-image-options-button,
   svg.tc-image-save-button,
   svg.tc-image-edit-button,
-  svg.tc-image-delete-button,
-  svg.tc-image-cancel-button,
-  svg.tc-image-done-button {
+  svg.tc-image-delete-button {
     display: none;
+  }
+
+  /* If a tiddler is tagged with 'editable', the edit button is not hidden */
+  .tc-tagged-editable svg.tc-image-edit-button {
+    display: inline;
+    margin-right: 15px;
   }
 
   /* Page Toolbar buttons you should hide by removing them from the 'More' section */
