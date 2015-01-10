@@ -1,0 +1,12 @@
+title: $:/config/CodeMirror
+type: application/json
+
+{
+  "require": [
+    "$:/plugins/tiddlywiki/codemirror/mode/markdown/markdown.js"
+  ],
+  "configuration": {
+    "showCursorWhenSelecting": true,
+    "theme": "spacejunk-solarized"
+  }
+}
