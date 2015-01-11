@@ -297,9 +297,8 @@ pre code {
 
 /* Tiddlers that consist of a single image */
 .tc-tiddler-body > img:only-child {
-  padding-bottom: 3px;
-  margin: -25px -25px -35px !important;
-  width: calc(100% + 50px);
+  margin: -10px -10px -17px !important;
+  width: calc(100% + 21px);
   max-width: none;
 }
 
@@ -442,6 +441,13 @@ pre code {
 
   .tc-tiddler-frame {
     width: auto;
+  }
+
+  /* Tiddlers that consist of a single image */
+  .tc-tiddler-body > img:only-child {
+    margin: -25px -25px -32px !important;
+    width: calc(100% + 51px);
+    max-width: none;
   }
 }
 
