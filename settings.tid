@@ -6,4 +6,8 @@ If you activate the read-only mode, you will be unable to access this panel. To 
 
 <$checkbox tiddler="$:/plugins/readonly/mode" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/plugins/readonly/mode">Read-only mode</$link> </$checkbox>
 
+<$reveal state="$:/plugins/readonly/mode" type="match" text="yes" default="no">
+  <$checkbox tiddler="$:/state/readonly" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/state/readonly">Temporarily disable read-only mode just for me</$link> </$checkbox>
+</$reveal>
+
 Note that this only hides the edit buttons. Users may still be able to modify and delete content. Make sure to configure your server accordingly.
