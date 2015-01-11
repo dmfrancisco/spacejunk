@@ -49,12 +49,11 @@ function shouldBeRemotePath(filepath, operation) {
   switch (operation) {
     case "write":
     case "delete":
-      // All visitors of the site can edit and delete tiddlers synced with Dropbox
+      // Changes and deleted tiddlers are synced with Dropbox
       return isTiddlersPath;
     case "read":
-      // If autosync is false, users will always see the last changes that were
-      // manually synced with the Heroku server (through the Heroku Dashboard)
-      return isTiddlersPath && !(process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync === false);
+      // Users will always see the last changes from Dropbox
+      return isTiddlersPath;
     default:
       return isTiddlersPath;
   }
@@ -157,31 +156,6 @@ sync.fiber(function() {
 
   // Boot the TW5 app
   $tw.boot.boot();
-
-  // If autosync is off, make changes to Dropbox but don't update anything in the server
-  if (process.env.SPACEJUNK_AUTOSYNC == "false" || config.autosync === false) {
-    monkeypatch($tw.wiki, 'addTiddler', function(original) {
-      return function (tiddler) {
-        if (!(tiddler instanceof $tw.Tiddler)) {
-          tiddler = new $tw.Tiddler(tiddler);
-        }
-        if (tiddler) {
-          var title = tiddler.fields.title;
-          if (title) {
-            // tiddlers[title] = tiddler; this.clearCache(title); this.clearGlobalCache();
-            this.enqueueTiddlerEvent(title);
-          }
-        }
-      };
-    });
-
-    monkeypatch($tw.wiki, 'deleteTiddler', function(original) {
-      return function (title) {
-        // delete tiddlers[title]; this.clearCache(title); this.clearGlobalCache();
-        this.enqueueTiddlerEvent(title, true);
-      };
-    });
-  }
 
   console.info("Boot completed. TiddlyWiki is now serving the application.");
 });
