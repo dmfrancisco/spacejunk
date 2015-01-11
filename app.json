@@ -1,6 +1,6 @@
 {
   "name": "SpaceJunk",
-  "description": "Create your own space using TiddlyWiki, Heroku & Dropbox. Please continue following the instructions on tryspacejunk.herokuapp.com/#Welcome",
+  "description": "Create your own space using TiddlyWiki, Heroku & Dropbox. Please continue following the instructions on https://tryspacejunk.herokuapp.com",
   "env": {
     "APP_NAME": {
       "description": "The App Name you chose above. Please make sure you fill that field and that it matches this one (despite being optional for the Heroku platform, it is required for the app to work)."
