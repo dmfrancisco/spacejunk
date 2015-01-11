@@ -147,11 +147,13 @@ monkeypatch(fs, 'statSync', function(original) {
 
 sync.fiber(function() {
   // Path to where files are stored
-  appname = process.env.APP_NAME || config.appname ||
-    sync.await(exec("heroku config | head -1 | cut -d \" \" -f2", sync.defer())).trim();
+  appname = process.env.APP_NAME || config.appname || "unknown";
   dropboxPath = process.env.DROPBOX_PATH || config.dropbox.path || ("/Apps/Heroku/"+ appname);
 
   console.info("Booting! Please wait...");
+
+  // Check if app is synced with Dropbox (otherwise this will halt the server)
+  dropbox.stat(dropboxPath);
 
   // Boot the TW5 app
   $tw.boot.boot();
