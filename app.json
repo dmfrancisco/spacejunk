@@ -13,6 +13,10 @@
     },
     "DROPBOX_TOKEN": {
       "description": "The access token is used to access your files. You can generate one after creating your Dropbox app by clicking \"Generate\" in the OAuth 2 section of the app's settings page."
+    },
+    "MAGIC_NUMBER": {
+      "description": "Here comes the silly part. Heroku does not have a \"Restart Server\" button. So enter here your favorite number, and we'll ask you to change it later to force Heroku to restart your new server.",
+      "value": "42"
     }
   }
 }
