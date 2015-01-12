@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+/* TODO Move all this logic to a server-side plugin. Instead of monkeypatching
+ * fs, do something similar to the FileSystemAdaptor (git.io/qhdgVQ). The
+ * problem is that some functions from boot.js (git.io/bghfxQ) would still need
+ * to be overridden somehow. That would allow us to deprecate this package and
+ * the main app could use the default TiddlyWiki package */
+
 var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
     sync = require("synchronize"),
@@ -33,7 +39,7 @@ var dropbox = new Dropbox.Client({
   token: (process.env.DROPBOX_TOKEN || config.dropbox.token)
 });
 
-// Allow these functions to be called synchronously
+// Allow these functions to be called synchronously (only used on boot!)
 sync(dropbox, 'readdir', 'readFile', 'stat');
 
 function monkeypatch(object, f, callback) {
@@ -143,6 +149,9 @@ monkeypatch(fs, 'statSync', function(original) {
   };
 });
 
+/* TODO Find a reasonable way to do this. `boot.js` does things synchronously,
+ * and that's why we need some calls to be synchronous. Nevertheless, this is
+ * almost certainly not a good idea :P */
 sync.fiber(function() {
   // Path to where files are stored
   appname = process.env.APP_NAME || config.appname || "unknown";
@@ -151,6 +160,7 @@ sync.fiber(function() {
   console.info("Booting! Please wait...");
 
   // Check if app is synced with Dropbox (otherwise this will halt the server)
+  // TODO Find a better way to check if Heroku & Dropbox are synced!
   dropbox.stat(dropboxPath);
 
   // Boot the TW5 app
