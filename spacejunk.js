@@ -3,7 +3,6 @@
 var  $tw = require("tiddlywiki/boot/boot.js").TiddlyWiki(),
  Dropbox = require("dropbox"),
     sync = require("synchronize"),
-    exec = require('child_process').exec,
       fs = require("fs"),
     path = require("path");
 
